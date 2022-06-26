@@ -1,9 +1,10 @@
-import Jimp from 'jimp';
+
 import {httpServer} from './src/http_server/index';
-import robot from 'robotjs';
+
 import { WebSocketServer } from 'ws';
 import { mouseController } from './src/mouseController';
 import { draw, figures } from './src/drawController';
+import { makeScreenshot } from './src/screenshot';
 
 const HTTP_PORT = 3000;
 const WS_PORT = 8000;
@@ -53,9 +54,11 @@ wss.on('connection', (ws) => {
         draw(figures.rectangle, param1, param2);
         break;
       }
+      case 'prnt_scrn': {
+        makeScreenshot(ws);
+        break;
+      }
     }
     console.log('received: %s', data);
   });
-
-  // ws.send('something');
 });
