@@ -19,7 +19,7 @@ const right = (offset: number): void => {
 }
 
 const position = (ws: WebSocket) => {
-  ws.send(`mouse_position ${pos.x},${pos.y}`);
+  ws.send(`mouse_position ${pos.x},${pos.y}\0`);
 };
 
 export const mouseController = {
