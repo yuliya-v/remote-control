@@ -3,6 +3,7 @@ import {httpServer} from './src/http_server/index';
 import robot from 'robotjs';
 import { WebSocketServer } from 'ws';
 import { mouseController } from './src/mouseController';
+import { draw, figures } from './src/drawController';
 
 const HTTP_PORT = 3000;
 const WS_PORT = 8000;
@@ -22,23 +23,35 @@ wss.on('connection', (ws) => {
     switch(cmd) {
       case 'mouse_up': {
         mouseController.up(param1);
-        return;
+        break;
       }
       case 'mouse_down': {
         mouseController.down(param1);
-        return;
+        break;
       }
       case 'mouse_left': {
         mouseController.left(param1);
-        return;
+        break;
       }
       case 'mouse_right': {
         mouseController.right(param1);
-        return;
+        break;
       }
       case 'mouse_position': {
         mouseController.position(ws);
-        return;
+        break;
+      }
+      case 'draw_circle': {
+        draw(figures.circle, param1);
+        break;
+      }
+      case 'draw_square': {
+        draw(figures.square, param1);
+        break;
+      }
+      case 'draw_rectangle': {
+        draw(figures.rectangle, param1, param2);
+        break;
       }
     }
     console.log('received: %s', data);
